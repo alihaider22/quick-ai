@@ -1,22 +1,12 @@
-import {
-  SignedOut,
-  SignedIn,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div>
-      <header>
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </header>
-      <h1>Quick.ai - Full Stack AI SaaS</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 }
