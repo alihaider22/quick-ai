@@ -8,7 +8,8 @@ import userRouter from "./routes/userRoutes.js";
 
 const app = express();
 
-await connectCloudinary();
+// Initialize Cloudinary
+connectCloudinary();
 
 app.use(cors());
 app.use(express.json());
@@ -21,10 +22,15 @@ app.use(requireAuth());
 app.use("/api/ai", aiRouter);
 app.use("/api/user", userRouter);
 
-const PORT = process.env.PORT || 3000;
+// For local development
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(
+      `Server is running on port ${PORT} => http://localhost:${PORT} 🍽️`
+    );
+  });
+}
 
-app.listen(PORT, () => {
-  console.log(
-    `Server is running on port ${PORT} => http://localhost:${PORT} 🍽️`
-  );
-});
+// Export for Vercel serverless functions
+export default app;
