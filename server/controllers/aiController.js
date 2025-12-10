@@ -4,7 +4,7 @@ import { clerkClient } from "@clerk/express";
 import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
-import { PDFParse } from "pdf-parse";
+// import { PDFParse } from "pdf-parse";
 
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -220,9 +220,11 @@ export const resumeReview = async (req, res) => {
     }
 
     const dataBuffer = fs.readFileSync(resume.path);
-    const pdfData = await PDFParse(dataBuffer);
+    // const pdfData = await PDFParse(dataBuffer);
 
-    const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses, and areas for improvement. Resume Content:\n\n${pdfData.text}`;
+    // const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses, and areas for improvement. Resume Content:\n\n${pdfData.text}`;
+
+    const prompt = "";
 
     const response = await AI.chat.completions.create({
       model: "gemini-2.0-flash",
